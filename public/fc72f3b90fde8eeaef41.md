@@ -169,26 +169,26 @@ impl From<Pixel> for Vec2 {
 新しいループ。
 
 ```rust
-    for j in min_y..=max_y {
-        for i in min_x..=max_x {
-            let pixel = Pixel { x: i, y: j };
-            let p = Vec2::from(pixel);
+for j in min_y..=max_y {
+    for i in min_x..=max_x {
+        let pixel = Pixel { x: i, y: j };
+        let p = Vec2::from(pixel);
 
-            if let Some((w0, w1, w2)) = barycentric(triangle, p) {
-                let color = interpolate_color(triangle, w0, w1, w2);
-                let rgb = image::Rgb([
-                    (color.r.clamp(0.0, 1.0) * 255.0) as u8,
-                    (color.g.clamp(0.0, 1.0) * 255.0) as u8,
-                    (color.b.clamp(0.0, 1.0) * 255.0) as u8,
-                ]);
+        if let Some((w0, w1, w2)) = barycentric(triangle, p) {
+            let color = interpolate_color(triangle, w0, w1, w2);
+            let rgb = image::Rgb([
+                (color.r.clamp(0.0, 1.0) * 255.0) as u8,
+                (color.g.clamp(0.0, 1.0) * 255.0) as u8,
+                (color.b.clamp(0.0, 1.0) * 255.0) as u8,
+            ]);
 
-                let (sx, sy) = transform.to_screen(i, j);
-                if sx >= 0 && sx < fb.width() as i32 && sy >= 0 && sy < fb.height() as i32 {
-                    fb.put_pixel(sx as u32, sy as u32, rgb);
-                }
+            let (sx, sy) = transform.to_screen(i, j);
+            if sx >= 0 && sx < fb.width() as i32 && sy >= 0 && sy < fb.height() as i32 {
+                fb.put_pixel(sx as u32, sy as u32, rgb);
             }
         }
     }
+}
 ```
 
 ## リファクタリング
@@ -197,21 +197,21 @@ impl From<Pixel> for Vec2 {
 これでバグを見つけやすくなるはず。ついでに画面サイズを大きく(```1280x720```)した。
 
 ```rust
-    let tri = Triangle {
-        v0: Vertex {
-            pos: Vec2 { x: 129.7, y: -26.4 },
-            color: Color::new(0.0, 0.0, 1.0),
-        },
-        v1: Vertex {
-            pos: Vec2 { x: 1327.3, y: 480.1 },
-            color: Color::new(0.0, 1.0, 0.0),
-        },
-        v2: Vertex {
-            pos: Vec2 { x: 524.0, y: 841.0 },
-            color: Color::new(1.0, 0.0, 0.0),
-        },
-    };
-    polygon_fill(&mut imgbuf, &transform, &tri);
+let tri = Triangle {
+    v0: Vertex {
+        pos: Vec2 { x: 129.7, y: -26.4 },
+        color: Color::new(0.0, 0.0, 1.0),
+    },
+    v1: Vertex {
+        pos: Vec2 { x: 1327.3, y: 480.1 },
+        color: Color::new(0.0, 1.0, 0.0),
+    },
+    v2: Vertex {
+        pos: Vec2 { x: 524.0, y: 841.0 },
+        color: Color::new(1.0, 0.0, 0.0),
+    },
+};
+polygon_fill(&mut imgbuf, &transform, &tri);
 ```
 
 ![output.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/13400/cdcc7474-06da-4ef0-bcb4-d4374eb97bc7.png)
@@ -244,12 +244,12 @@ impl Transform {
 構文的にはピンと来ないけど、シンプルに記述できる。
 
 ```diff_rust
--                let (sx, sy) = transform.to_screen(i, j);
--                if sx >= 0 && sx < fb.width() as i32 && sy >= 0 && sy < fb.height() as i32 {
--                    fb.put_pixel(sx as u32, sy as u32, rgb);
-+                if let Some((sx, sy)) = transform.to_screen(i, j) {
-+                    fb.put_pixel(sx, sy, rgb);
-                 }
+-    let (sx, sy) = transform.to_screen(i, j);
+-    if sx >= 0 && sx < fb.width() as i32 && sy >= 0 && sy < fb.height() as i32 {
+-        fb.put_pixel(sx as u32, sy as u32, rgb);
++    if let Some((sx, sy)) = transform.to_screen(i, j) {
++        fb.put_pixel(sx, sy, rgb);
+     }
 ```
 
 ChatGPTにZバッファー法を習いながらその4に続く。
