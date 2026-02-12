@@ -5,8 +5,8 @@ tags:
   - CG
   - Polygon
 private: false
-updated_at: ''
-id: null
+updated_at: '2026-02-12T15:16:58+09:00'
+id: 9a7884cb6ae70ce7cae7
 organization_url_name: null
 slide: false
 ignorePublish: false
