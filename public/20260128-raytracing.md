@@ -15,7 +15,7 @@ ignorePublish: false
 
 週末レイトレーシングの[ここ](https://inzkyk.xyz/ray_tracing_in_one_weekend/week_1/1_9_metal_material/)をやります。
 
-## 金属マテリアル
+# 金属マテリアル
 
 Materialモジュールに、Metal構造体を追加する。拡散の代わりに反射する。
 
@@ -117,7 +117,7 @@ impl Material for Metal {
 
 後で考える。まずは先に進む。
 
-## ぼやけた反射
+# ぼやけた反射
 
 反射率にfuzzinessを追加。```new()```するときに、条件付き(```1.0```以上は```1.0```とする)の引数をどう書くのか分からなかったけど、Gemini CLIが教えてくれた。
 
@@ -164,7 +164,7 @@ impl Material for Metal {
 
 ![output.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/13400/bc236245-9d4a-4443-9c7b-874435e1cc0a.png)
 
-## 誘電マテリアル
+# 誘電マテリアル
 
 屈折率を扱うDielectricモジュールを追加。
 
@@ -236,7 +236,7 @@ impl Material for Dielectric {
 
 ![output.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/13400/0223aede-7ddd-45f5-8d8c-d1dfc80d0e24.png)
 
-## シュリックの近似
+# シュリックの近似
 
 ガラスの反射率の近似値を求める関数を追加
 

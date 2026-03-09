@@ -15,7 +15,7 @@ ignorePublish: false
 
 週末レイトレーシングの[ここ](https://inzkyk.xyz/ray_tracing_in_one_weekend/week_1/1_8_diffuse_material/)をやります。
 
-## ランダムな vec3 を計算するユーティリティ関数
+# ランダムな vec3 を計算するユーティリティ関数
 
 Vec3モジュールに下記を追加。
 
@@ -46,7 +46,7 @@ pub fn random_in_unit_sphere() -> Vec3 {
 }
 ```
 
-#### メモ
+## メモ
 
 その4の[共有モジュール](https://qiita.com/sumikawa@github/items/cb1ae0a697cea6296b93#%E5%85%B1%E7%94%A8%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB)で見逃していたが、C++では引数が異なる同名の関数を使っていたが、Rustになったタイミングで異なる関数名になっていた。C++のようなことはできないらしい。理屈でいえば、コンパイル時にどちらを使うか判断できるので、静的型付けでもやれそうな気はする。
 
