@@ -38,7 +38,7 @@ GUIでログイン認証画面をクリックするより素早くログイン�
 
 下記のコマンドを実行してください。システムに対する設定変更のためroot権限が必要です。
 
-```
+```shell
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -boolean false
 ```
 
@@ -46,13 +46,13 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.c
 
 また、依存ライブラリを下記のコマンドでインストールしてください。
 
-```
+```shell
 pip install -r requirements.txt
 ```
 
 スクリプトを適当な実行パスにコピーしてください
 
-```
+```shell
 cp wifi_login.py /somewhere/path/bin/
 ```
 
@@ -60,7 +60,7 @@ cp wifi_login.py /somewhere/path/bin/
 
 公衆無線LANに接続したら、下記コマンドを実行してください。公衆無線LAN種別を自動的に検知して、ログインを行います。
 
-```
+```shell
 wifi_login.py
 ```
 
@@ -74,6 +74,6 @@ wifi_login.py
 
 無効にしたCaptive Network Assistantを再有効したい場合は下記を実行してください。
 
-```
+```shell
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -boolean true
 ```

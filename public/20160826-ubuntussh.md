@@ -2,7 +2,8 @@
 title: Ubuntu 16.04 LTSで、sshログインできない対策
 tags:
   - SSH
-  - ubuntu16.04
+  - ubuntu
+  - security
 private: false
 updated_at: '2026-02-11T17:43:21+09:00'
 id: de5d1352b4973f0a4ff9
@@ -14,7 +15,7 @@ Ubuntu 16.04 LTSをインストールしたら、sshの公開鍵認証でログ�
 /var/log/auth.log を確認したところ、下記のエラーが出力されている。
 OpenSSH-7.0でssh-dssは無効化されたようだ。
 
-```shell-session
+```shell
 Aug 20 23:36:26 ubuntu sshd[25608]: userauth_pubkey: key type ssh-dss not in PubkeyAcceptedKeyTypes [preauth]
 ```
 
@@ -25,7 +26,7 @@ Aug 20 23:36:26 ubuntu sshd[25608]: userauth_pubkey: key type ssh-dss not in Pub
 
 ssh-dssを再有効化するのはありえないので、ECDSAへの移行を決心する。```ssh-keygen```で、鍵ペアを生成。
 
-```shell-session
+```shell
 % ssh-keygen -t ecdsa -b 384 -C 'sumikawa@XXX'
 Generating public/private ecdsa key pair.
 Enter file in which to save the key (/Users/sumikawa/.ssh/id_ecdsa):
