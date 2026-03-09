@@ -6,7 +6,7 @@ tags:
   - lambda
   - CodeCommit
 private: false
-updated_at: '2018-11-18T23:55:13+09:00'
+updated_at: '2026-03-09T20:02:46+09:00'
 id: fcef5e384e75cb973353
 organization_url_name: null
 slide: false

@@ -5,7 +5,7 @@ tags:
   - CG
   - RayTracing
 private: false
-updated_at: '2026-02-11T17:43:21+09:00'
+updated_at: '2026-03-09T20:02:46+09:00'
 id: f7a455909fe4596a66bf
 organization_url_name: null
 slide: false
