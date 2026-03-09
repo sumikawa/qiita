@@ -1,11 +1,11 @@
 ---
 title: Ubuntu 16.04 LTSで、sshログインできない対策
 tags:
+  - Ubuntu
   - SSH
-  - ubuntu
-  - security
+  - Security
 private: false
-updated_at: '2026-02-11T17:43:21+09:00'
+updated_at: '2026-03-09T15:33:43+09:00'
 id: de5d1352b4973f0a4ff9
 organization_url_name: null
 slide: false
