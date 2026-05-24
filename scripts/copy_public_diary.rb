@@ -10,13 +10,38 @@ FILE_PATTERN = /\A(20\d{2})(\d{2})(\d{2})-.+\.md\z/
 FRONT_MATTER_PATTERN = /\A---\n(?<header>.*?)\n---\n?/m
 
 def transform_body(body)
-  transformed = body.gsub(/```mermaid\n(.*?)\n```/m) do
+  transformed = body.gsub(/^```diff_[^\n]*$/, '```diff')
+  transformed = transformed.gsub(/```mermaid\n(.*?)\n```/m) do
     "<pre class=\"mermaid\">\n#{$1}\n</pre>"
   end
 
   transformed = transformed.gsub(/(?<!`)(?<ticks>`+)([^`\n]+?)\k<ticks>(?!`)(?=\S)/, '\0 ')
   transformed = transformed.gsub(/^## /, '### ')
   transformed.gsub(/^# /, '## ')
+end
+
+def build_output(content, front_matter, metadata)
+  id = metadata['id']
+  title = metadata['title']
+  tags = Array(metadata['tags']).filter_map do |tag|
+    normalized = tag.to_s.strip.downcase
+    normalized unless normalized.empty?
+  end
+  tags << 'qiita'
+  tags.uniq!
+
+  rewritten = +"---\n"
+  rewritten << "title: #{title}\n"
+  rewritten << "tags: #{tags.join(', ')}\n"
+  rewritten << "qiita_url: https://qiita.com/sumikawa@github/items/#{id}\n"
+  rewritten << "---\n"
+  rewritten << "<%= qiita %>\n"
+  rewritten << "\n"
+  if content.length > front_matter[0].length
+    body = content[front_matter[0].length..]
+    rewritten << transform_body(body)
+  end
+  rewritten
 end
 
 def main
@@ -47,12 +72,6 @@ def main
     metadata = YAML.safe_load(front_matter[:header], permitted_classes: [], aliases: false) || {}
     id = metadata['id']
     title = metadata['title']
-    tags = Array(metadata['tags']).filter_map do |tag|
-      normalized = tag.to_s.strip.downcase
-      normalized unless normalized.empty?
-    end
-    tags << 'qiita'
-    tags.uniq!
 
     unless id
       warn "Skip #{source}: id not found in YAML front matter"
@@ -64,16 +83,7 @@ def main
       next
     end
 
-    rewritten = +"---\n"
-    rewritten << "title: #{title}\n"
-    rewritten << "tags: #{tags.join(', ')}\n"
-    rewritten << "---\n"
-    rewritten << "<%= qiita('https://qiita.com/sumikawa@github/items/#{id}') %>\n"
-    rewritten << "\n"
-    if content.length > front_matter[0].length
-      body = content[front_matter[0].length..]
-      rewritten << transform_body(body)
-    end
+    rewritten = build_output(content, front_matter, metadata)
 
     FileUtils.mkdir_p(target_dir)
     File.write(target, rewritten)
