@@ -10,6 +10,8 @@ id: 9093f26b1df1f747f544
 organization_url_name: null
 slide: false
 ignorePublish: false
+posting_campaign_uuid: null
+agreed_posting_campaign_term: false
 ---
 # はじめに
 

@@ -10,6 +10,8 @@ id: 516ccc52dfc07d8a0237
 organization_url_name: null
 slide: false
 ignorePublish: false
+posting_campaign_uuid: null
+agreed_posting_campaign_term: false
 ---
 フルコードは[github](https://github.com/sumikawa/myraytracing)にあります。
 

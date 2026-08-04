@@ -9,6 +9,8 @@ id: 1a150990429f5c6bb061
 organization_url_name: null
 slide: false
 ignorePublish: false
+posting_campaign_uuid: null
+agreed_posting_campaign_term: false
 ---
 公衆無線LANに自動ログインするスクリプトを書きました。
 githubにて公開しています。

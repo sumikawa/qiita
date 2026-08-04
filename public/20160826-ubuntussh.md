@@ -10,6 +10,8 @@ id: de5d1352b4973f0a4ff9
 organization_url_name: null
 slide: false
 ignorePublish: false
+posting_campaign_uuid: null
+agreed_posting_campaign_term: false
 ---
 Ubuntu 16.04 LTSをインストールしたら、sshの公開鍵認証でログインできなくなった。
 /var/log/auth.log を確認したところ、下記のエラーが出力されている。
